@@ -1,13 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Design tokens ── */
+:root {
+  --bg-page:       #0f1117;
+  --bg-card:       #1a1d27;
+  --bg-card-hover: #1f2235;
+  --border:        #2a2d3e;
+  --accent-blue:   #4f8ef7;
+  --accent-green:  #34d399;
+  --accent-yellow: #fbbf24;
+  --accent-red:    #f87171;
+  --text-primary:  #e2e8f0;
+  --text-secondary:#94a3b8;
+  --radius:        12px;
+  --shadow:        0 4px 24px rgba(0,0,0,0.4);
+  --transition:    0.2s ease;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+/* ── Shared button base ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+  letter-spacing: 0.3px;
+}
+.btn:hover  { transform: translateY(-2px); filter: brightness(1.12); }
+.btn:active { transform: translateY(0);    filter: brightness(0.95); }
+
+.btn-blue   { background: var(--accent-blue);   color: #fff; box-shadow: 0 4px 14px rgba(79,142,247,0.35); }
+.btn-green  { background: var(--accent-green);  color: #065f46; box-shadow: 0 4px 14px rgba(52,211,153,0.35); }
+.btn-yellow { background: var(--accent-yellow); color: #78350f; box-shadow: 0 4px 14px rgba(251,191,36,0.35); }
+.btn-red    { background: var(--accent-red);    color: #7f1d1d; box-shadow: 0 4px 14px rgba(248,113,113,0.35); }
+
+/* ── Form panel (used by all forms) ── */
+.form-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-top: 16px;
+  box-shadow: var(--shadow);
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Shared input ── */
+.form-panel input {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  background: #0f1117;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+.form-panel input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.18);
+}
+.form-panel input::placeholder { color: var(--text-secondary); }
+
+/* ── Product table ── */
+.product-table-wrap {
+  margin-top: 20px;
+  overflow-x: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: slideDown 0.25s ease;
+}
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+}
+.product-table thead { background: #252840; }
+.product-table th {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+.product-table td {
+  padding: 13px 18px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+.product-table tbody tr:last-child td { border-bottom: none; }
+.product-table tbody tr { transition: background var(--transition); }
+.product-table tbody tr:hover { background: var(--bg-card-hover); }
+.price-cell { color: var(--accent-green); font-weight: 600; }
